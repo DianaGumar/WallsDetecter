@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".WorkActivity">
+
+    <TextView
+        android:id="@+id/tv_connected"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_green_dark"
+        android:text="unconnected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <LinearLayout
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:background="#b94a59"
+            android:textColor="#f9feff"
+            android:text="Unconect"
+            android:id="@+id/b_unconnected"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="4dp" />
+
+        <Button
+            android:layout_margin="2dp"
+            android:text="Picture"
+            android:id="@+id/b_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_margin="2dp"
+            android:text="RealTime video"
+            android:id="@+id/b_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_data_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+
+</LinearLayout>
