@@ -1,29 +1,27 @@
 package com.example.wallsdetector.ClientSocket;
 
-import android.os.Build;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
 
-//singletone
 public class MobSocket {
 
-    private  String   TAG_LOG = "info";
+    private String TAG_LOG = "info";
 
+    private int BUFER_SIZE = 1024;
     private Socket socket;
     private DataOutputStream dataOutputStream = null;
     private DataInputStream dataInputStream = null;
-    private byte[] buffer = new byte[1024];
+    private byte[] buffer = new byte[BUFER_SIZE];
 
     public boolean isConnected(){
         return socket.isConnected();
@@ -84,15 +82,17 @@ public class MobSocket {
 
     }
 
-    public boolean sendMessage(String str)
-    {
+    public boolean sendMessage(String msg) {
         try
         {
+            //DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+
             if(dataOutputStream == null){
                 dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
                 Log.d(TAG_LOG, "output stream created");
             }
-            dataOutputStream.write(str.getBytes());
+
+            dataOutputStream.write(msg.getBytes());
 //            dataOutputStream.writeUTF(str);
             dataOutputStream.flush();
 
@@ -106,24 +106,57 @@ public class MobSocket {
         return false;
     }
 
-    public String getMessage()
-    {
-        String s = null;
+    public boolean sendMessage(byte[] bytes) {
+        try
+        {
+            //DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+
+            if(dataOutputStream == null){
+                dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                Log.d(TAG_LOG, "output stream created");
+            }
+            int size = bytes.length;
+
+            dataOutputStream.write(String.valueOf(size).getBytes());
+            dataOutputStream.write(bytes,0,size);
+//            dataOutputStream.writeUTF(str);
+            dataOutputStream.flush();
+
+            Log.d(TAG_LOG, "output stream worked");
+            return true;
+
+        }
+        catch (IOException e)
+        { e.printStackTrace(); }
+
+        return false;
+    }
+
+    public byte[] getMessage() {
+
+        byte[] result = new byte[1];
 
         try
         {
+            //DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
             if(dataInputStream == null){
                 dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                 Log.d(TAG_LOG, "input stream created");
             }
 
-            int length = dataInputStream.read(buffer);
+            int length = 0;
+            do{
+                length = dataInputStream.read(buffer);
+                byteArrayOutputStream.write(buffer, 0, length);
 
-            if (length != -1){
-                s = new String(buffer, 0, length);
-            }
+            } while(length >= BUFER_SIZE);
 
             Log.d(TAG_LOG, "input stream worked");
+            result = byteArrayOutputStream.toByteArray();
+
+            byteArrayOutputStream.close();
         }
         catch (NullPointerException e){
             e.printStackTrace();
@@ -131,9 +164,6 @@ public class MobSocket {
         catch (IOException e)
         { e.printStackTrace(); }
 
-        return s;
+        return result;
     }
-
-
-
 }

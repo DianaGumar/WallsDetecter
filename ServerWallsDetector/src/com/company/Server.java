@@ -1,16 +1,23 @@
 package com.company;
 
-import com.sun.xml.internal.ws.resources.SenderMessages;
+import sun.misc.IOUtils;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class Server {
 
     public static final int SERVER_PORT = 8086;
+    private static final int BUFER_SIZE = 1024;
 
     private ServerSocket server;
     private ExecutorService executor = Executors.newCachedThreadPool();
@@ -19,8 +26,9 @@ public class Server {
 
         server = new ServerSocket(SERVER_PORT);
 
-        System.out.println(server.getLocalSocketAddress());
-        System.out.println("Your current IP address : " + InetAddress.getLocalHost());
+        InetAddress ip = InetAddress.getLocalHost();
+        System.out.println("Current IP address : " + ip.getHostAddress());
+        System.out.println("Current port : " + SERVER_PORT);
 
         while(true){
             final Socket socket = server.accept();
@@ -35,15 +43,13 @@ public class Server {
                     }
                 }
                 private void handleSocket(final Socket socket) throws IOException {
-                    DataOutputStream dataOutputStream = null;
-                    DataInputStream dataInputStream = null;
-                    byte[] buffer = new byte[1024];
+                    byte[] buffer = new byte[BUFER_SIZE];
 
-                    dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+                    DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
                     dataOutputStream.write("Success connected!".getBytes());
                     dataOutputStream.flush();
 
-                    dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                    DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                     int i = dataInputStream.read(buffer);
 
                     int client_type = 0;
@@ -56,7 +62,7 @@ public class Server {
                             WorkWithFirstClientType(dataOutputStream, dataInputStream, buffer);
                         }
                         else if(client_type == 2){
-                            WorkWithSecondClientType(dataOutputStream, dataInputStream);
+                            WorkWithSecondClientType(socket, buffer);
                         }
                         else{
                             System.out.println("client type wasn't recognized: " + client_type);
@@ -64,36 +70,81 @@ public class Server {
                     }
 
                     System.out.println("client ended work. " + client_type);
-
-                    dataInputStream.close();
                     dataOutputStream.close();
+                    dataInputStream.close();
                     socket.close();
                 }
             });
         }
     }
 
-    private void WorkWithFirstClientType(DataOutputStream dataOutputStream, DataInputStream dataInputStream,
-                                         byte[] buffer) throws IOException {
-        String message = "";
+    private void WorkWithFirstClientType(DataOutputStream dataOutputStream,
+                                         DataInputStream dataInputStream, byte[] buffer) throws IOException {
 
         while(true){
-            int length = dataInputStream.read(buffer);
-            if(length != -1){
-                message = new String(buffer, 0, length);
-                if(message.equals("0")) break;
+            int length = 0;
+            int current_size = 0;
+            int size = 0;
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-                System.out.println("First client send: " + message);
+            length = dataInputStream.read(buffer);
+            if (length > 1){
+                String message = new String(buffer, StandardCharsets.UTF_8);
+                System.out.println("msg: " + message);
+                size = Integer.parseInt(message.trim());
+                System.out.println("future img size: " + size);
+            }
 
-                message = "ansver from server: + " + message;
-                dataOutputStream.write(message.getBytes());
-                dataOutputStream.flush();
+            System.out.println("got\t | all_got\t | need_all_got");
+
+            do{
+                length = dataInputStream.read(buffer);
+                byteArrayOutputStream.write(buffer, 0, length);
+                current_size += length;
+
+                System.out.print("\r" + length + "\t | " + current_size + "\t | " + size);
+
+            } while(current_size < size);
+
+            if (length > 1){
+                byte[] b_img = byteArrayOutputStream.toByteArray();
+                System.out.println("\nimg size: " + b_img.length);
+                ByteArrayInputStream bais = new ByteArrayInputStream(b_img);
+                BufferedImage img = ImageIO.read(bais);
+                bais.close();
+
+                ImgHelper.SaveImg(img, "N:\\LAB_DISK\\CourseWork2020_november\\ServerWallsDetector\\original.jpg");
+                BufferedImage new_img = ImgHelper.FindWalls(img);
+                ImgHelper.SaveImg(new_img, "N:\\LAB_DISK\\CourseWork2020_november\\ServerWallsDetector\\edited.jpg");
+
+                // отправка обработанного изображения
+                try{
+                    //ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                    ImageIO.write(new_img, "jpg", byteArrayOutputStream);
+//                    byte[] new_b_img = byteArrayOutputStream.toByteArray();
+//
+//                    System.out.println("new img size: " + new_b_img.length);
+
+                    dataOutputStream.write(b_img);
+                    dataOutputStream.flush();
+
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+//                message = new String(buffer, 0, length);
+//                if(message.equals("0")) break;
+//                System.out.println("First client send: " + message);
             }
             else break;
+
+            byteArrayOutputStream.close();
         }
+
+        dataOutputStream.close();
+        dataInputStream.close();
     }
 
-    private void WorkWithSecondClientType(DataOutputStream dataOutputStream, DataInputStream dataInputStream){
+    private void WorkWithSecondClientType(Socket socket, byte[] buffer){
         System.out.println("work with second client doesnt implement");
     }
 

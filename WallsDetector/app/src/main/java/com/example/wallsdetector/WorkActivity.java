@@ -17,30 +17,25 @@ import com.example.wallsdetector.fragments.FragmentPicture;
 import com.example.wallsdetector.fragments.FragmentVideo;
 import com.example.wallsdetector.ClientSocket.MobSocket;
 
+import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 
 public class WorkActivity extends AppCompatActivity {
 
     private Button b_picture;
     private Button b_video;
-
     private Button b_unconnected;
-
     protected TextView tv_connected;
 
     private MobSocket mobSocket;
-//    private ClientTypeTask clientTypeTask;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
 
-        tv_connected = findViewById(R.id.tv_connected);
-
         b_unconnected = findViewById(R.id.b_unconnected);
-
+        tv_connected = findViewById(R.id.tv_connected);
         b_picture = findViewById(R.id.b_picture);
         b_video = findViewById(R.id.b_video);
 
@@ -130,7 +125,6 @@ public class WorkActivity extends AppCompatActivity {
         protected Boolean doInBackground(Integer ... params) {
             Log.d("info", "start asynck task with 1");
             try {
-
                 if(mobSocket.sendMessage(params[0].toString())) {
                     id = params[0];
                     return true;

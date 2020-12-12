@@ -1,52 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:gravity="center_horizontal"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:scaleType="fitCenter"
+        android:id="@+id/iv_picture"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="Photo for sending to server"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:gravity="center"
-            android:text="Picture"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
+        <Button
+            android:layout_margin="5dp"
+            android:text="Upload photo"
+            android:id="@+id/b_picture_upload_photo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/et_picture_client_message"
-            android:layout_marginHorizontal="10dp"
-            android:gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="hi"
-            />
-
         <Button
-            android:layout_margin="20dp"
-            android:text="send"
-            android:id="@+id/b_picture_send"
-            android:layout_width="100dp"
+            android:layout_margin="5dp"
+            android:text="send photo"
+            android:id="@+id/b_picture_send_photo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-
-    <TextView
-        android:gravity="center"
-        android:id="@+id/tv_picture_server_ansver"
-        android:text="Future server ansver.."
-        android:textSize="20sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
+</FrameLayout>

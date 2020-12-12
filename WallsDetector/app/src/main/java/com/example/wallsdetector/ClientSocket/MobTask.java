@@ -3,6 +3,10 @@ package com.example.wallsdetector.ClientSocket;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.nio.charset.StandardCharsets;
+import java.sql.Array;
+import java.util.Arrays;
+
 public class MobTask extends AsyncTask<String, Void, Boolean> {
 
     @Override
@@ -12,12 +16,11 @@ public class MobTask extends AsyncTask<String, Void, Boolean> {
             mobSocket.connectToDevice(params[0], Integer.parseInt(params[1]));
 
             if(mobSocket.isConnected()){
-                String messageFromServer = mobSocket.getMessage();
+                String messageFromServer = Arrays.toString(mobSocket.getMessage());
 
-                if(messageFromServer != null){
-                    Log.d("info", "connect successful");
-                    return true;
-                }
+                Log.d("info", "server msg: " + messageFromServer);
+                Log.d("info", "connect successful");
+                return true;
 
             }else {
                 Log.d("info", "Can't connected");
