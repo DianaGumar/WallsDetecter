@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="580511d2-3d2e-42ae-b7e3-9a67fdbe7d24" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/ImgHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../WallsDetector/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ServerWallsDetector/com/company/Server$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ServerWallsDetector/com/company/Server$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ServerWallsDetector/com/company/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ServerWallsDetector/com/company/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/ImgHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/ImgHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/ClientSocket/MobSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/ClientSocket/MobSocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/ClientSocket/MobTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/ClientSocket/MobTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/WorkActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/WorkActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/fragments/FragmentPicture.java" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/java/com/example/wallsdetector/fragments/FragmentPicture.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/res/layout/activity_work.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/res/layout/activity_work.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../WallsDetector/app/src/main/res/layout/fragment_picture.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../WallsDetector/app/src/main/res/layout/fragment_picture.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +29,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -80,6 +71,8 @@
       <workItem from="1607328932188" duration="200000" />
       <workItem from="1607777046761" duration="16367000" />
       <workItem from="1607797734012" duration="14463000" />
+      <workItem from="1607814056101" duration="34000" />
+      <workItem from="1607855218145" duration="11174000" />
     </task>
     <servers />
   </component>
@@ -95,22 +88,22 @@
       <screen x="0" y="30" width="1366" height="738" />
     </state>
     <state x="462" y="143" key="FileChooserDialogImpl/0.30.1366.738@0.30.1366.738" timestamp="1607329007028" />
-    <state width="1323" height="181" key="GridCell.Tab.0.bottom" timestamp="1607812223253">
+    <state width="1323" height="181" key="GridCell.Tab.0.bottom" timestamp="1607867857404">
       <screen x="0" y="30" width="1366" height="738" />
     </state>
-    <state width="1323" height="181" key="GridCell.Tab.0.bottom/0.30.1366.738@0.30.1366.738" timestamp="1607812223253" />
-    <state width="1323" height="181" key="GridCell.Tab.0.center" timestamp="1607812223253">
+    <state width="1323" height="181" key="GridCell.Tab.0.bottom/0.30.1366.738@0.30.1366.738" timestamp="1607867857404" />
+    <state width="1323" height="181" key="GridCell.Tab.0.center" timestamp="1607867857403">
       <screen x="0" y="30" width="1366" height="738" />
     </state>
-    <state width="1323" height="181" key="GridCell.Tab.0.center/0.30.1366.738@0.30.1366.738" timestamp="1607812223253" />
-    <state width="1323" height="181" key="GridCell.Tab.0.left" timestamp="1607812223253">
+    <state width="1323" height="181" key="GridCell.Tab.0.center/0.30.1366.738@0.30.1366.738" timestamp="1607867857403" />
+    <state width="1323" height="181" key="GridCell.Tab.0.left" timestamp="1607867857403">
       <screen x="0" y="30" width="1366" height="738" />
     </state>
-    <state width="1323" height="181" key="GridCell.Tab.0.left/0.30.1366.738@0.30.1366.738" timestamp="1607812223253" />
-    <state width="1323" height="181" key="GridCell.Tab.0.right" timestamp="1607812223253">
+    <state width="1323" height="181" key="GridCell.Tab.0.left/0.30.1366.738@0.30.1366.738" timestamp="1607867857403" />
+    <state width="1323" height="181" key="GridCell.Tab.0.right" timestamp="1607867857404">
       <screen x="0" y="30" width="1366" height="738" />
     </state>
-    <state width="1323" height="181" key="GridCell.Tab.0.right/0.30.1366.738@0.30.1366.738" timestamp="1607812223253" />
+    <state width="1323" height="181" key="GridCell.Tab.0.right/0.30.1366.738@0.30.1366.738" timestamp="1607867857404" />
     <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1607797686502">
       <screen x="0" y="30" width="1366" height="738" />
     </state>

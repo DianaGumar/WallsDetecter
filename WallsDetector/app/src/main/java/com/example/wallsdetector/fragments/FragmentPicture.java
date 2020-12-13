@@ -148,18 +148,15 @@ public class FragmentPicture extends Fragment {
     }
 
     class ControllerTask extends AsyncTask<byte[], Void, Void> {
-
-        String server_ms = "-_-";
         byte[] im_bytes;
 
         @Override
         protected Void doInBackground(byte[] ... params) {
             try {
-                mobSocket.sendMessage(params[0]);
+                mobSocket.sendFile(params[0]);
                 Log.d("info", "send message: " + params[0].length);
                 // принимаем обработанное фото
-                im_bytes = mobSocket.getMessage();
-                Log.d("info", "get message: " + im_bytes.length);
+                im_bytes = mobSocket.getFile();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -172,11 +169,16 @@ public class FragmentPicture extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Log.d("info", "task ended");
-            Toast.makeText(getContext(),server_ms,Toast.LENGTH_SHORT).show();
-
             // отображаем обработанное изображение
-            Bitmap bitmap = BitmapFactory.decodeByteArray(im_bytes, 0, im_bytes.length);
-            iv_image.setImageBitmap(bitmap);
+            if(im_bytes != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(im_bytes, 0, im_bytes.length);
+                iv_image.setImageBitmap(bitmap);
+                Toast.makeText(getContext(), "the resulting new image!",Toast.LENGTH_SHORT).show();
+            }
+            else{
+                iv_image.setImageBitmap(null);
+                Toast.makeText(getContext(), "img was't correct send from server -_-",Toast.LENGTH_SHORT).show();
+            }
 
             sended = true;
         }

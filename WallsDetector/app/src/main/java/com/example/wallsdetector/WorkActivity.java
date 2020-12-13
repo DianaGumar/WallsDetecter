@@ -120,12 +120,11 @@ public class WorkActivity extends AppCompatActivity {
             return null;
         }
 
-
         @Override
         protected Boolean doInBackground(Integer ... params) {
             Log.d("info", "start asynck task with 1");
             try {
-                if(mobSocket.sendMessage(params[0].toString())) {
+                if(mobSocket.sendMessage(params[0])) {
                     id = params[0];
                     return true;
                 }

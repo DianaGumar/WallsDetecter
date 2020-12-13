@@ -16,7 +16,7 @@ public class MobTask extends AsyncTask<String, Void, Boolean> {
             mobSocket.connectToDevice(params[0], Integer.parseInt(params[1]));
 
             if(mobSocket.isConnected()){
-                String messageFromServer = Arrays.toString(mobSocket.getMessage());
+                String messageFromServer = mobSocket.getMessage();
 
                 Log.d("info", "server msg: " + messageFromServer);
                 Log.d("info", "connect successful");
