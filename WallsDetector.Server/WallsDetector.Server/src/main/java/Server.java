@@ -1,10 +1,7 @@
-package com.company;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -79,7 +76,6 @@ public class Server {
             // получение размера принимаемого масиива
             size = dataInputStream.readInt();
             if(size < 1) {
-                System.out.println("user off");
                 break;
             }
             System.out.println("future img size: " + size);
@@ -95,7 +91,6 @@ public class Server {
             } while(current_size < size);
 
             if(length < 2) {
-                System.out.println("user off_2");
                 break;
             }
 
@@ -106,8 +101,10 @@ public class Server {
             bais.close();
 
             ImgHelper.SaveImg(img, "./original.jpg");
+            System.out.println("Image saved!");
             BufferedImage new_img = ImgHelper.FindWalls(img);
             ImgHelper.SaveImg(new_img, "./edited.jpg");
+            System.out.println("Image saved!");
 
             // отправка обработанного изображения
             try{
