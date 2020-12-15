@@ -1,8 +1,10 @@
-#How to run project WallsDetecter:
+# How to run project WallsDetecter:
 https://github.com/DianaGumar/WallsDetecter
 
-REQUIREMENTS:
-pip
+Prototype system for automated data collection from agricultural sensors.
+
+REQUIREMENTS: 
+1. pip
 
 STEPS:
 1. Run initialize.bat
