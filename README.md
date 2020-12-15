@@ -14,6 +14,3 @@ STEPS:
 	- 3.2 Click "picture" btn
 	- 3.3 Click "upload photo" btn choose one of options
 	- 3.4 Click "send photo" btn, wait
-
-
-![intermediate result](https://github.com/DianaGumar/WallsDetecter/blob/main/example.png?raw=true)
