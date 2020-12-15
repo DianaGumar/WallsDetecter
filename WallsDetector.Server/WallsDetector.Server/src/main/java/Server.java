@@ -18,7 +18,7 @@ public class Server {
         server = new ServerSocket(SERVER_PORT);
 
         InetAddress ip = InetAddress.getLocalHost();
-        System.out.println("Current IP address : " + ip.getHostAddress());
+        System.out.println("Current IP address (look for ipconfig).. : " + ip.getHostAddress());
         System.out.println("Current port : " + SERVER_PORT);
 
         while(true){
@@ -31,9 +31,11 @@ public class Server {
                         handleSocket(socket);
                     } catch (IOException e) {
                         System.out.println("handle exeption " + e.getMessage());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
-                private void handleSocket(final Socket socket) throws IOException {
+                private void handleSocket(final Socket socket) throws IOException, InterruptedException {
                     byte[] buffer = new byte[BUFER_SIZE];
 
                     DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
@@ -65,7 +67,8 @@ public class Server {
     }
 
     private void WorkWithFirstClientType(DataOutputStream dataOutputStream,
-                                         DataInputStream dataInputStream, byte[] buffer) throws IOException {
+                                         DataInputStream dataInputStream, byte[] buffer)
+            throws IOException, InterruptedException {
 
         while(true){
             int length = 0;
@@ -86,7 +89,7 @@ public class Server {
                 length = dataInputStream.read(buffer);
                 byteArrayOutputStream.write(buffer, 0, length);
                 current_size += length;
-                System.out.println(length + "\t | " + current_size + "\t | " + size);
+                System.out.print("\r" + length + "\t | " + current_size + "\t | " + size);
 
             } while(current_size < size);
 
@@ -100,11 +103,9 @@ public class Server {
             BufferedImage img = ImageIO.read(bais);
             bais.close();
 
-            ImgHelper.SaveImg(img, "./original.jpg");
-            System.out.println("Image saved!");
+            // обработка картинки
+            System.out.println("\nlooking for wallses borders..");
             BufferedImage new_img = ImgHelper.FindWalls(img);
-            ImgHelper.SaveImg(new_img, "./edited.jpg");
-            System.out.println("Image saved!");
 
             // отправка обработанного изображения
             try{
