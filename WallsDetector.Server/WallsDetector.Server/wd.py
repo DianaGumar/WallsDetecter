@@ -130,12 +130,20 @@ def segmented_intersections(lines):
 
 
 # In[8]:
-
+def resize_img(img, max_h):
+    h, w, c = img.shape
+    x = 1
+    if h > max_h:
+        x = h/max_h
+    resized_image = cv.resize(img, (int(w/x), int(h/x)))
+    return resized_image
 
 def wallsFinder(img_path_in, img_path_out):
     src2 = cv.imread(img_path_in, 1)
-    
-    dst = cv.Canny(src2.copy(), 0, 255, None, 3)
+    #     blur = cv.bilateralFilter(src2.copy(),7,75,75) 
+    src2 = resize_img(src2, 600)
+    src2b = cv.medianBlur(src2.copy(),5) 
+    dst = cv.Canny(src2b.copy(), 0, 255, None, 3)
     h, w, c = src2.shape
     blank_image = np.zeros((h,w,1), np.uint8)
     counters = GetCounters(dst, 0.001)
@@ -166,8 +174,9 @@ def wallsFinder(img_path_in, img_path_out):
     
 def wallsFinderSimple(img_path_in, img_path_out):
     src2 = cv.imread(img_path_in, 1)
-
-    dst = cv.Canny(src2.copy(), 0, 255, None, 3)
+    src2 = resize_img(src2, 800)
+    src2b = cv.medianBlur(src2.copy(),5)
+    dst = cv.Canny(src2b.copy(), 0, 255, None, 3)
     h, w, c = src2.shape
     blank_image = np.zeros((h,w,1), np.uint8)
     counters = GetCounters(dst, 0.002)
@@ -181,8 +190,8 @@ def wallsFinderSimple(img_path_in, img_path_out):
 
 import sys
 if __name__ == "__main__":
-    wallsFinder(sys.argv[1], sys.argv[2])
-   # wallsFinderSimple(sys.argv[1], sys.argv[2])
+    #wallsFinder(sys.argv[1], sys.argv[2])
+    wallsFinderSimple(sys.argv[1], sys.argv[2])
 #     wallsFinder("./2.jpg", "./22.jpg")
 
 
