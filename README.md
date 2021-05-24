@@ -5,7 +5,7 @@ Walls segmentation and coloring system
 
 INTERMIDIATE RESULT:
 
-![intermediate result](https://github.com/DianaGumar/WallsDetecter/img/result.png?raw=false) 
+![intermediate result](https://github.com/DianaGumar/WallsDetecter/blob/main/img/result.png?raw=false) 
 
 NN author https://github.com/CSAILVision/semantic-segmentation-pytorch
 
