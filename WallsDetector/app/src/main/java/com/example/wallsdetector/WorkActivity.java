@@ -101,9 +101,6 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
     //единственная задача-отправить серверу сообщение о том, какой тип контроллера выбран
     //и открывать соответствующий фрагмент
     class ClientTypeTask extends AsyncTask<Integer, Void, Boolean> {

@@ -126,7 +126,6 @@ public class FragmentPicture extends Fragment {
         builder.setTitle("Choose your profile picture");
 
         builder.setItems(options, new DialogInterface.OnClickListener() {
-
             @Override
             public void onClick(DialogInterface dialog, int item) {
 

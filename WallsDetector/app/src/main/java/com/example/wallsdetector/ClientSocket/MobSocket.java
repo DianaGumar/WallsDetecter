@@ -67,6 +67,7 @@ public class MobSocket {
         try
         {
             Log.d(TAG_LOG, "start created new soket object");
+            //socket.setSoTimeout(50000);
             socket.connect(new InetSocketAddress(ip,port));
             Log.d(TAG_LOG, "new Soket object");
 
